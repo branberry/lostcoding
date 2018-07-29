@@ -12,7 +12,7 @@ const IndexPage = () => (
 
     </div>
 
-    <Link to="/about-css-modules/">To css modules!</Link>
+  <Link to="/about/">About Me </Link>
   </div>
 )
 
