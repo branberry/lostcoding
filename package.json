@@ -6,12 +6,15 @@
   "dependencies": {
     "gatsby": "^1.9.277",
     "gatsby-link": "^1.6.46",
+    "gatsby-plugin-glamor": "^1.6.13",
     "gatsby-plugin-react-helmet": "^2.0.11",
     "gatsby-plugin-typography": "^1.7.19",
+    "glamorous": "^4.13.1",
     "invariant": "^2.2.4",
     "react-helmet": "^5.2.0",
     "typography-theme-bootstrap": "^0.16.7",
     "typography-theme-fairy-gates": "^0.15.11",
+    "typography-theme-kirkham": "^0.16.3",
     "typography-theme-lawton": "^0.15.10",
     "typography-theme-stardust": "^0.16.14"
   },
