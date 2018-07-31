@@ -3,7 +3,7 @@ import Link from 'gatsby-link'
 
 const ListLink = props => 
 <li style={{display: 'inline-block', marginRight: '1rem'}}>
-  <Link to={props.to} style={{color: "#DDDDDD", textDecoration: `none`}}>
+  <Link to={props.to} style={{color: "#DDDDDD"}}>
     {props.children}
   </Link>
 </li>

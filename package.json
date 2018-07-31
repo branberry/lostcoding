@@ -16,7 +16,8 @@
     "typography-theme-fairy-gates": "^0.15.11",
     "typography-theme-kirkham": "^0.16.3",
     "typography-theme-lawton": "^0.15.10",
-    "typography-theme-stardust": "^0.16.14"
+    "typography-theme-stardust": "^0.16.14",
+    "typography-theme-stern-grove": "^0.15.10"
   },
   "keywords": [
     "gatsby"
