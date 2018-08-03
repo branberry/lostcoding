@@ -3,7 +3,6 @@ module.exports = {
     title: 'Lost Coding',
   },
   plugins: [
-    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
