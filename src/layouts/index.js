@@ -14,10 +14,10 @@ const ListLink = props =>
 </li>
 //style={{ margin: `0 auto`, maxWidth: 650, padding: `0px 0px`}}
 export default ({ children, data }) => 
-  <div className="styles.container">
-    <header style={{ paddingBottom: '1.5rem', backgroundColor: `#333333` }}>
+  <div className={styles.container}>
+    <header className={styles.headers}>
       <Link to="/" style={{textShadow: 'none', backgroundImage: 'none'}}>
-        <h2 className={styles.title}> {data.site.siteMetadata.title} </h2>
+        <h1 className={styles.title}> {data.site.siteMetadata.title} </h1>
       </Link>
       <ul style={{ listStyle: 'none', float: 'right'}}>
         <ListLink to="/">Home</ListLink>
