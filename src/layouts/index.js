@@ -1,5 +1,6 @@
-import React from "react";
-import Link from 'gatsby-link'
+import React from 'react';
+import Link from 'gatsby-link';
+import styles from '../components/index.module.css';
 
 /**
  * Creates a nicely formatted navigation bar in the header
@@ -11,12 +12,12 @@ const ListLink = props =>
     {props.children}
   </Link>
 </li>
-
+//style={{ margin: `0 auto`, maxWidth: 650, padding: `0px 0px`}}
 export default ({ children, data }) => 
-  <div style={{ margin: `0 auto`, maxWidth: 650, padding: `0px 0px`}}>
+  <div className="styles.container">
     <header style={{ paddingBottom: '1.5rem', backgroundColor: `#333333` }}>
       <Link to="/" style={{textShadow: 'none', backgroundImage: 'none'}}>
-        <h3 style={{ display: `inline`, color: "#DDDDDD" }}> {data.site.siteMetadata.title} </h3>
+        <h2 className={styles.title}> {data.site.siteMetadata.title} </h2>
       </Link>
       <ul style={{ listStyle: 'none', float: 'right'}}>
         <ListLink to="/">Home</ListLink>
@@ -37,4 +38,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
