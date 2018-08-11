@@ -1,0 +1,45 @@
+{
+  "name": "lost-coding-webpage",
+  "description": "Lost Coding website",
+  "version": "1.0.0",
+  "author": "Brandon Ly <brandonly@lostcoding.com>",
+  "dependencies": {
+    "gatsby": "^1.9.277",
+    "gatsby-link": "^1.6.46",
+    "gatsby-plugin-catch-links": "^1.0.24",
+    "gatsby-plugin-glamor": "^1.6.13",
+    "gatsby-plugin-react-helmet": "^2.0.11",
+    "gatsby-plugin-styled-components": "^2.0.11",
+    "gatsby-plugin-typography": "^1.7.19",
+    "gatsby-source-filesystem": "^1.5.39",
+    "glamorous": "^4.13.1",
+    "invariant": "^2.2.4",
+    "react-helmet": "^5.2.0",
+    "styled-components": "^3.4.0",
+    "typography-theme-bootstrap": "^0.16.7",
+    "typography-theme-fairy-gates": "^0.15.11",
+    "typography-theme-kirkham": "^0.16.3",
+    "typography-theme-lawton": "^0.15.10",
+    "typography-theme-stardust": "^0.16.14",
+    "typography-theme-stern-grove": "^0.15.10"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write 'src/**/*.js'",
+    "deploy": "gatsby build && gh-pages -d public -b master",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.2.0",
+    "prettier": "^1.13.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  }
+}
