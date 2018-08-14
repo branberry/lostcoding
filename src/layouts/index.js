@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import styles from '../components/index.module.css';
-
+import styles from '../components/index.module.scss';
 /**
  * Creates a nicely formatted navigation bar in the header
  * @param {*} props contains the information of the page we want to link to!
@@ -16,7 +15,7 @@ const ListLink = props =>
 export default ({ children, data }) => 
   <div className={styles.container}>
     <header className={styles.headers}>
-      <Link to="/" style={{textShadow: 'none', backgroundImage: 'none'}}>
+      <Link to="/" >
         <h1 className={styles.title}> {data.site.siteMetadata.title} </h1>
       </Link>
       <ul style={{ listStyle: 'none', float: 'right'}}>

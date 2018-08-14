@@ -1,3 +1,5 @@
+@import "materialize-src/sass/materialize";
+
 .container {
     display: flex;
     flex-direction: column;
@@ -11,14 +13,4 @@
     display: inline;
     color: #DDDDDD;
     margin-left: 40%;
-}
-
-.box {
-    position: absolute;
-    width: 159px;
-    height: 239px;
-    left: 102px;
-    top: 211px;
-
-    border: 1px solid #000000;
 }
