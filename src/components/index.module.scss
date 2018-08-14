@@ -1,9 +1,9 @@
-@import "materialize-src/sass/materialize";
+//@import "materialize-src/sass/materialize";
 
 .container {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    //align-content: center;
 }
 .headers { 
     padding-bottom: 1.5rem;
@@ -12,5 +12,5 @@
 .title {
     display: inline;
     color: #DDDDDD;
-    margin-left: 40%;
+    margin-left: 5%;
 }
