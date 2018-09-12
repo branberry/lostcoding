@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import styles from '../components/index.module.scss'
-import Grid from '@material-ui/core/Grid'
+import Grid from 'react-semantic-ui'
+
 /**
  * Creates a nicely formatted navigation bar in the header
  * @param {*} props contains the information of the page we want to link to!
