@@ -76,8 +76,6 @@ class DenseAppBar extends Component {
               </Link>
             </List>
           </Drawer>
-
-
           <Route path="/about/" component={About}/>
         </div>
       </Router>
