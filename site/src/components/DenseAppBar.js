@@ -14,6 +14,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import About from './About';
+
 
 const styles = {
   root: {
@@ -36,9 +38,6 @@ class DenseAppBar extends Component {
     left: false,
   };
 
-
-
-
   toggleDrawer = (side, open) => () => {
     this.setState({
       [side]: open,
@@ -56,26 +55,32 @@ class DenseAppBar extends Component {
   }
   render() {
 
-    const { classes } = this.props;
 
     return (
-      <div>
-        <AppBar position="static">
-        <Toolbar>
-            <IconButton  color="inherit" aria-label="Menu">
-              <MenuIcon onClick={this.toggleDrawer('left',true)} />
-            </IconButton>
-        </Toolbar>
-        </AppBar>
-        <Drawer open={this.state.left} onClose={this.toggleDrawer('left',false)}>
-          <List>
-            <ListItem>
-              <ListItemIcon><MailIcon/></ListItemIcon>
-              <ListItemText primary="About" />
-            </ListItem>
-          </List>
-        </Drawer>
-      </div>
+      <Router>
+        <div>
+          <AppBar position="static">
+          <Toolbar>
+              <IconButton  color="inherit" aria-label="Menu">
+                <MenuIcon onClick={this.toggleDrawer('left',true)} />
+              </IconButton>
+          </Toolbar>
+          </AppBar>
+          <Drawer open={this.state.left} onClose={this.toggleDrawer('left',false)}>
+            <List>
+            <Link to="/about/">
+              <ListItem>
+                <ListItemIcon><MailIcon/></ListItemIcon>
+                <ListItemText primary="About" />
+              </ListItem>
+              </Link>
+            </List>
+          </Drawer>
+
+
+          <Route path="/about/" component={About}/>
+        </div>
+      </Router>
     );
   }
 }
