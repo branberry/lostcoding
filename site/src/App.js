@@ -9,12 +9,11 @@ class App extends Component {
   render() {
     return (
       <Router>
-
-      <div className="App">
-        <DenseAppBar/>
-        <Route path="/" exact component={Index}/>
-        <Route path="/about/" component={About}/>
-      </div>
+        <div className="App">
+          <DenseAppBar/>
+          <Route path="/" exact component={Index}/>
+          <Route path="/about/" component={About}/>
+        </div>
       </Router>
 
     );

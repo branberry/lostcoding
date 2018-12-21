@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home'
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -66,8 +67,8 @@ class DenseAppBar extends Component {
         <div>
           <AppBar position="static" color="red">
           <Toolbar>
-              <IconButton  color="inherit" aria-label="Menu">
-                <MenuIcon onClick={this.toggleDrawer('left',true)} />
+              <IconButton  onClick={this.toggleDrawer('left',true)}   color="inherit" aria-label="Menu">
+                <MenuIcon/>
               </IconButton>
               <Typography variant="h4" color="inherit" aria-label="title"   style={styles.title}>Lost Coding</Typography>
 
@@ -75,6 +76,12 @@ class DenseAppBar extends Component {
           </AppBar>
           <Drawer open={this.state.left} onClose={this.toggleDrawer('left',false)}>
             <List>
+            <Link to="/">
+              <ListItem  onChange={this.toggleDrawer('left',false)} onClick={this.toggleDrawer('left',false)}>
+                  <ListItemIcon><HomeIcon/></ListItemIcon>
+                  <ListItemText  primary="Home" />
+                </ListItem>
+              </Link>
             <Link to="/about/">
               <ListItem  onChange={this.toggleDrawer('left',false)} onClick={this.toggleDrawer('left',false)}>
                 <ListItemIcon><MailIcon/></ListItemIcon>
