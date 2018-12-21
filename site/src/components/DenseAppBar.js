@@ -26,6 +26,12 @@ const styles = {
     marginLeft: -18,
     marginRight: 10,
   },
+
+  title: {
+    margin: 'auto',
+    width: '50%'
+
+  },
 };
 
 
@@ -57,28 +63,27 @@ class DenseAppBar extends Component {
 
 
     return (
-      <Router>
         <div>
-          <AppBar position="static">
+          <AppBar position="static" color="red">
           <Toolbar>
               <IconButton  color="inherit" aria-label="Menu">
                 <MenuIcon onClick={this.toggleDrawer('left',true)} />
               </IconButton>
+              <Typography variant="h4" color="inherit" aria-label="title"   style={styles.title}>Lost Coding</Typography>
+
           </Toolbar>
           </AppBar>
           <Drawer open={this.state.left} onClose={this.toggleDrawer('left',false)}>
             <List>
             <Link to="/about/">
-              <ListItem>
+              <ListItem  onChange={this.toggleDrawer('left',false)} onClick={this.toggleDrawer('left',false)}>
                 <ListItemIcon><MailIcon/></ListItemIcon>
-                <ListItemText primary="About" />
+                <ListItemText  primary="About" />
               </ListItem>
               </Link>
             </List>
           </Drawer>
-          <Route path="/about/" component={About}/>
         </div>
-      </Router>
     );
   }
 }
