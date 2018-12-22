@@ -2,3 +2,4 @@
 base = "site/"
 publish = "site/build"
 command = "yarn build"
+functions = "functions/"
