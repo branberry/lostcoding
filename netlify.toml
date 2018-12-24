@@ -3,3 +3,7 @@ base = "site/"
 publish = "site/build"
 command = "yarn build"
 functions = "functions/"
+
+[build.environment]
+
+GO_IMPORT_PATH = "https://github.com/wowbob396/lostcoding"
