@@ -5,7 +5,6 @@
         "prettier": false,
         "jsx-no-multiline-js": false,
         "jsx-no-lambda": false,
-        "import-name": true,
         "no-boolean-literal-compare": false,
         "ordered-imports": false
     }
