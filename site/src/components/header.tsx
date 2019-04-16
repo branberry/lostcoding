@@ -3,14 +3,15 @@ import PropTypes from "prop-types"
 import React from "react"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
-const Header = ({ siteTitle }) => (
+const Header = ({ siteTitle }: {siteTitle: any}) => (
   <div>
     <AppBar position="static">
       <Toolbar>
-
+        <h1>{siteTitle}</h1>
       </Toolbar>
     </AppBar>
   </div>
+  
   // <header
   //   style={{
   //     background: `rebeccapurple`,
