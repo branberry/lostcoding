@@ -1,4 +1,5 @@
 module.exports = {
+<<<<<<< HEAD
   siteMetadata: {
     title: `Gatsby Starter Blog`,
     author: `Kyle Mathews`,
@@ -76,3 +77,14 @@ module.exports = {
     },
   ],
 }
+=======
+    siteMetadata: {
+      name: `Hello Typescript World!`,
+      tagline: `Gatsby + SASS + Typescript = 💪`
+    },  
+    plugins: [
+      `gatsby-plugin-sass`,
+      `gatsby-plugin-typescript`,
+    ],
+  }
+>>>>>>> 34e60cbf2da56d1cba93b290a5778b0545996e89

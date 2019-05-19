@@ -1,6 +1,10 @@
-The MIT License (MIT)
+MIT License
 
+<<<<<<< HEAD
 Copyright (c) 2015 Gatsbyjs
+=======
+Copyright (c) 2018 gatsbyjs
+>>>>>>> 34e60cbf2da56d1cba93b290a5778b0545996e89
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
