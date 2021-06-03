@@ -28,7 +28,7 @@ const IndexPage: React.FC<PageProps> = props => {
     <main>
       <title>Welcome!</title>
       <div className="intro-container">
-        <h1>Hi, I'm Brandon!</h1>
+        <h1>Hi, my name is Brandon!</h1>
       </div>
       <Canvas>
         <ambientLight />
