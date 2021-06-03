@@ -1,5 +1,6 @@
 $fontFamily:"Source Code Pro", Courier, mono;
 $fontColor: white;
+
 main, body {
   font-family: $fontFamily;
   color: $fontColor;
@@ -10,8 +11,4 @@ main, body {
   display: flex;
   justify-content: center;
   max-width: 100%;
-}
-
-.intro-item {
-
 }
