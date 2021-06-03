@@ -1,2 +1,5 @@
 [build]
 base = "site/"
+
+[context.production]
+  environment = { NODE_VERSION = "14.16.1" }
