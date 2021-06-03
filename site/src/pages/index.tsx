@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'gatsby';
-
+import { PageProps } from 'gatsby';
 // markup
-const IndexPage = () => {
+const IndexPage: React.FC<PageProps> = props => {
+  const {  } = props;
   return (
     <main>
       <title>Welcome!</title>
