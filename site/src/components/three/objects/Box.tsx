@@ -2,19 +2,24 @@ import React, { useState, useRef } from 'react';
 import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 
-function Box(props: JSX.IntrinsicElements['mesh']) {
+interface BoxProps {
+  meshProps: JSX.IntrinsicElements['mesh'];
+  rotationSpeed?: number;
+}
+function Box(props: BoxProps) {
 
+  const { meshProps, rotationSpeed } = props;
   const { camera } = useThree();
-  const mesh = useRef<THREE.Mesh>(null!)
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
+  const mesh = useRef<THREE.Mesh>(null!);
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
 
-  useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
+  useFrame((state, delta) => (mesh.current.rotation.x += (rotationSpeed || 0.01)));
 
 
   return (
     <mesh
-      {...props}
+      {...meshProps}
       ref={mesh}
       scale={active ? 1.5 : 1}
       onClick={(_) => setActive(!active)}

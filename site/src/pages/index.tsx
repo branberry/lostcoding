@@ -21,7 +21,9 @@ const IndexPage: React.FC<PageProps> = props => {
             <h3>And this is my website.</h3>
           </div>
         </div>
-        <IndexCanvas/>
+        <div id="canvas-container">
+          <IndexCanvas/>
+        </div>
       </animated.div>
     </main>
   )
