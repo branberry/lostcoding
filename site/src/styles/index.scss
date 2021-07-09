@@ -5,6 +5,7 @@ main, body {
   font-family: $fontFamily;
   color: $fontColor;
   background-color: rgb(26, 41, 63);
+  height: 100vh;
 }
 
 .intro-container {
@@ -19,6 +20,7 @@ main, body {
   flex-grow: 1;
 }
 
-.canvas {
-  max-height: 100%;
+#canvas-container {
+  height: 80vh;
+  max-width: 100%;
 }
