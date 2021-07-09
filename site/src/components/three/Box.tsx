@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import * as THREE from 'three'
-import { useFrame } from '@react-three/fiber'
+import * as THREE from 'three';
+import { useFrame } from '@react-three/fiber';
 
 function Box(props: JSX.IntrinsicElements['mesh']) {
   const mesh = useRef<THREE.Mesh>(null!)

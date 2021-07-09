@@ -9,6 +9,12 @@ main, body {
 
 .intro-container {
   display: flex;
-  justify-content: center;
   max-width: 100%;
+  flex-direction: column;
+}
+
+.intro-item {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
 }
