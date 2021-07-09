@@ -1,12 +1,17 @@
 import React, { useState, useRef } from 'react';
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three'
+import { useFrame, useThree } from '@react-three/fiber'
 
 function Box(props: JSX.IntrinsicElements['mesh']) {
+
+  const { camera } = useThree();
   const mesh = useRef<THREE.Mesh>(null!)
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
-  useFrame((state, delta) => (mesh.current.rotation.x += 0.01))
+
+  useFrame((state, delta) => (mesh.current.rotation.x += 0.01));
+
+
   return (
     <mesh
       {...props}
@@ -16,7 +21,7 @@ function Box(props: JSX.IntrinsicElements['mesh']) {
       onPointerOver={(_) => setHover(true)}
       onPointerOut={(_) => setHover(false)}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'}  />
     </mesh>
   )
 }
