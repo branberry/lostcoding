@@ -12,13 +12,13 @@ const IndexPage: React.FC<PageProps> = props => {
       <animated.div style={animationProps}>
         <div className="intro-container">
           <div className="intro-item"> 
-            <h1>Hello, world! My name is Brandon.</h1>
+            <h1>Hello, world! My name is Brandon</h1>
           </div>
           <div className="intro-item">
-            <h2>I am a software engineer.</h2>
+            <h2>I am a software engineer</h2>
           </div>
           <div className="intro-item">
-            <h3>And this is my website.</h3>
+            <h3>This is my website</h3>
           </div>
         </div>
         <div id="canvas-container">
