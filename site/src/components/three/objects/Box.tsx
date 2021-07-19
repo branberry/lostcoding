@@ -1,14 +1,16 @@
 import React, { useState, useRef } from 'react';
 import * as THREE from 'three';
-import { RootState, useFrame } from '@react-three/fiber';
+import { RootState, ThreeEvent, useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
+import { Link } from 'gatsby';
 
 interface BoxProps {
   meshProps: JSX.IntrinsicElements['mesh'];
   rotationSpeed?: number;
+  link?: string;
 }
 function Box(props: BoxProps) {
-  const { meshProps, rotationSpeed } = props;
+  const { meshProps, rotationSpeed, link } = props;
 
   const mesh = useRef<THREE.Mesh>(null!);
   const [hovered, setHover] = useState(false);
@@ -21,16 +23,20 @@ function Box(props: BoxProps) {
   });
 
   return (
-    <animated.mesh
-      {...meshProps}
-      ref={mesh}
-      scale={scale}
-      onClick={(_) => setActive(!active)}
-      onPointerOver={(_) => setHover(true)}
-      onPointerOut={(_) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'}  />
-    </animated.mesh>
+    <Link to={ link || "/"}>
+      <animated.mesh
+        {...meshProps}
+        ref={mesh}
+        scale={scale}
+        onClick={(event: ThreeEvent<MouseEvent>) => {
+          setActive(!active);
+        }}
+        onPointerOver={(_) => setHover(true)}
+        onPointerOut={(_) => setHover(false)}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'}  />
+      </animated.mesh>
+    </Link>
   )
 }
 
