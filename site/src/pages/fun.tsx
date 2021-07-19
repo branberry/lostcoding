@@ -9,4 +9,6 @@ const FunPage: React.FC = () => {
       </h1>
     </div>
   );
-}
+};
+
+export default FunPage;

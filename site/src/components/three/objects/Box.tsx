@@ -28,9 +28,7 @@ function Box(props: BoxProps) {
         {...meshProps}
         ref={mesh}
         scale={scale}
-        onClick={(event: ThreeEvent<MouseEvent>) => {
-          setActive(!active);
-        }}
+        onClick={(_) => setActive(!active)}
         onPointerOver={(_) => setHover(true)}
         onPointerOut={(_) => setHover(false)}>
         <boxGeometry args={[1, 1, 1]} />
