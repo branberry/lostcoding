@@ -1,10 +1,16 @@
-import { Canvas, MeshProps, useFrame } from '@react-three/fiber'
-import { useSpring, animated, config } from '@react-spring/three'
-import React, { useState, useRef } from 'react'
+import { useSpring, config, animated } from "@react-spring/three";
+import { MeshProps, useFrame } from "@react-three/fiber";
+import { useState, useRef } from "react";
 
-function ThreeObject() {
+interface ConeProps {
+  changePage: () => void;
+}
+
+export default function Cone(props: ConeProps) {
   const [active, setActive] = useState(false);
   const coneMesh = useRef<MeshProps>();
+
+  const { changePage } = props;
 
   console.log(active);
 
@@ -21,19 +27,14 @@ function ThreeObject() {
   });
 
   return <animated.mesh 
-    onClick={() => setActive(!active)}
+    onClick={() => changePage()}
+    onPointerEnter={() => setActive(!active)}
+    onPointerLeave={() => setActive(!active)}
     scale={scale}
     ref={coneMesh}
+
   >
   <coneGeometry />
   <animated.meshStandardMaterial color={color}/>
 </animated.mesh>
-}
-
-export default function CanvasComponent() {
-  return <Canvas>
-    <ambientLight/>
-    <pointLight color={[10,10,10]}/>
-    <ThreeObject />
-  </Canvas>
 }
