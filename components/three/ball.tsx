@@ -1,8 +1,8 @@
-import { MeshProps } from "@react-three/fiber";
+import { MaterialProps, MeshProps } from "@react-three/fiber";
 
+type BallProps = MeshProps & MaterialProps;
 
-
-export default function Ball(props: MeshProps) {
+export default function Ball(props: BallProps) {
   const { color, position } = props;
 
   return (
