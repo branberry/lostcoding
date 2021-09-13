@@ -1,6 +1,7 @@
 import { useSpring, config, animated } from '@react-spring/three';
 import { MeshProps, useFrame } from '@react-three/fiber';
 import { useState, useRef } from 'react';
+import { Mesh } from 'three';
 
 interface ConeProps {
   changePage: () => void;
@@ -8,7 +9,7 @@ interface ConeProps {
 
 export default function Cone(props: ConeProps) {
   const [active, setActive] = useState(false)
-  const coneMesh = useRef<MeshProps>()
+  const coneMesh = useRef<Mesh>()
 
   const { changePage } = props;
 
@@ -20,7 +21,7 @@ export default function Cone(props: ConeProps) {
 
   useFrame(({ clock }) => {
     if (coneMesh.current) {
-      coneMesh.current.rotation.y = clock.getElapsedTime()
+      coneMesh.current!.rotation.y = clock.getElapsedTime()
     }
   });
 
