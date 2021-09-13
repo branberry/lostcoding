@@ -1,14 +1,16 @@
 import { MaterialProps, MeshProps } from "@react-three/fiber";
+import { forwardRef } from "react";
+import { Mesh } from "three";
 
-type BallProps = MeshProps & MaterialProps;
+export type BallProps = MeshProps & MaterialProps;
 
-export default function Ball(props: BallProps) {
-  const { color, position } = props;
+export default forwardRef<Mesh, BallProps>(function Ball(props, ref) {
+  const { color, position, scale } = props;
 
   return (
-    <mesh position={position || [1,1,-1]}>
+    <mesh position={position || [1,1,-1]} scale={scale || 1} ref={ref}>
       <sphereGeometry/>
-      <meshLambertMaterial color={color || "red"}/>
+      <meshLambertMaterial color={color || "red"} />
     </mesh>
   );
-}
+});
