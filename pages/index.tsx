@@ -72,7 +72,7 @@ const Planets = () => {
 
   useFrame(({clock}) => {
     if (mainPlanetRef.current) {
-      mainPlanetRef.current.rotation.x = clock.getElapsedTime();
+      mainPlanetRef.current!.rotation.x = clock.getElapsedTime() * 0.5;
     }
   });
 
