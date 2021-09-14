@@ -4,7 +4,8 @@ import Cone from '../components/three/cone';
 import Ball, { BallProps } from '../components/three/ball';
 import router from 'next/router';
 import { OrbitControls } from '@react-three/drei';
-import THREE, { Mesh, Vector3 } from 'three';
+import * as THREE from 'three';
+import { Mesh, Vector3 } from 'three';
 import { useMemo, useRef } from 'react';
 import { useSpring, animated } from '@react-spring/three';
 
