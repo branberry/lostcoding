@@ -1,7 +1,3 @@
 export default function TestPage() {
-  return (
-    <h1>
-      Hello!
-    </h1>
-  )
+  return <h1>Hello!</h1>;
 }
