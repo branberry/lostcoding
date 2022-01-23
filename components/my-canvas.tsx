@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import { Mesh, ShaderMaterial } from 'three';
 import Intro from './three/scenes/intro';
-
+import { Physics } from '@react-three/cannon';
 interface ParticleProps {
 	pointCount: number;
 }
@@ -59,9 +59,12 @@ function Particles({ pointCount }: ParticleProps) {
 export default function MyCanvas() {
 	return (
 		<Canvas>
-			<Intro />
-			<Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
-			<OrbitControls />
+			<Physics>
+				<Intro />
+				<Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
+				<OrbitControls />
+				<ambientLight />
+			</Physics>
 		</Canvas>
 	);
 }
