@@ -1,53 +1,80 @@
 import { Center, Box } from '@chakra-ui/react';
-import { Canvas, extend, useFrame, useLoader } from '@react-three/fiber';
+import { Canvas, extend, MeshProps, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
 import { Text, SpotLight, Shadow, Stars, Cloud, Sky } from '@react-three/drei';
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Ref, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { motion as motion3d } from 'framer-motion-3d';
 import { motion, Transition } from 'framer-motion';
+import { Euler, Mesh, TextureLoader, Vector3 } from 'three';
 
 extend({ TextGeometry });
 
 const Banner: React.FC = () => {
 	const font = useLoader(FontLoader, '/static/fonts/bold.blob');
+	const material = useLoader(TextureLoader, '/static/materials/textmatcap.png');
+
 	const config = useMemo(
 		() => ({
 			font,
-			size: 4,
-			height: 5,
+			size: 40,
+			height: 30,
 			curveSegments: 32,
 			bevelEnabled: true,
-			bevelThickness: 0.1,
-			bevelSize: 0.5,
+			bevelThickness: 6,
+			bevelSize: 2.5,
 			bevelOffset: 0,
 			bevelSegments: 8,
 		}),
 		[font]
 	);
 
+	const lostRef = useRef<MeshProps>(null);
+	const codingRef = useRef<MeshProps>(null);
+	const groupRef = useRef<MeshProps>(null);
+
+	useThree(({ camera }) => {
+		camera.position.set(0, 0, 100);
+
+		if (codingRef.current && lostRef.current) {
+			const codingPosition: Vector3 = codingRef.current.position! as Vector3;
+
+			(lostRef.current.position as Vector3).x = codingPosition.x - 150;
+			(lostRef.current.position as Vector3).y = codingPosition.y;
+			(lostRef.current.position as Vector3).z = codingPosition.z;
+		}
+	});
+
+	useFrame(({ clock }) => {
+		if (groupRef.current) {
+			(groupRef.current.rotation! as Euler).x = Math.sin(clock.getElapsedTime() * 0.3) / 2;
+			(groupRef.current.rotation! as Euler).y = Math.sin(clock.getElapsedTime() * 0.3) / 2;
+			(groupRef.current.rotation! as Euler).z = Math.sin(clock.getElapsedTime() * 0.3) / 2;
+		}
+	});
+
 	return (
-		<group scale={[0.6, 0.6, 0.4]}>
-			<motion3d.mesh receiveShadow castShadow position={[-15, -2, 0]} whileHover={{ scale: 1.2 }}>
-				<textGeometry args={['LOST', config]} />
-				<meshNormalMaterial />
-				<Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
-			</motion3d.mesh>
-			<motion3d.mesh position={[0, -2, 0]} whileHover={{ scale: 1.2 }}>
-				<textGeometry args={['CODING', config]} />
-				<meshNormalMaterial />
-			</motion3d.mesh>
+		<>
+			<group scale={[0.6, 0.6, 0.4]} ref={groupRef}>
+				<motion3d.mesh ref={lostRef} receiveShadow castShadow whileHover={{ scale: 1.2 }}>
+					<textGeometry args={['LOST', config]} />
+					<meshMatcapMaterial matcap={material} />
+					<Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
+				</motion3d.mesh>
+				<motion3d.mesh ref={codingRef} position={[-20, -10, 0]} whileHover={{ scale: 1.2 }}>
+					<textGeometry args={['CODING', config]} />
+					<meshMatcapMaterial matcap={material} />
+				</motion3d.mesh>
+			</group>
+			<ambientLight intensity={1} />
+			<pointLight position={[-100, 0, 0]} />
 			<Stars radius={500} depth={50} count={5000} fade />
-		</group>
+		</>
 	);
 };
 
 const IntroductionSection: React.FC = () => {
-	const transition: Transition = {
-		hidden: { opacity: 0 },
-		show: { opacity: 1, delay: 10.0 },
-	};
 	return (
 		<Center>
 			<motion.h1
@@ -65,8 +92,6 @@ export default function Home() {
 			<Box>
 				<Canvas>
 					<Physics>
-						<ambientLight intensity={4} />
-						<pointLight position={[0, 0, -2]} />
 						<Banner />
 					</Physics>
 				</Canvas>
