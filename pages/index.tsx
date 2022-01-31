@@ -6,20 +6,9 @@ import { useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { motion as motion3d } from 'framer-motion-3d';
-import { motion } from 'framer-motion';
-import { ErrorBoundary } from 'react-error-boundary';
+import { motion, Transition } from 'framer-motion';
 
 extend({ TextGeometry });
-
-function ErrorFallback({ error, resetErrorBoundary }: any) {
-	return (
-		<div role="alert">
-			<p>Something went wrong:</p>
-			<pre>{error.message}</pre>
-			<button onClick={resetErrorBoundary}>Try again</button>
-		</div>
-	);
-}
 
 const Banner: React.FC = () => {
 	const font = useLoader(FontLoader, '/static/fonts/bold.blob');
@@ -55,13 +44,16 @@ const Banner: React.FC = () => {
 };
 
 const IntroductionSection: React.FC = () => {
-	const transition = {
+	const transition: Transition = {
 		hidden: { opacity: 0 },
-		show: { opacity: 1, delay: 5.0 },
+		show: { opacity: 1, delay: 10.0 },
 	};
 	return (
 		<Center>
-			<motion.h1 initial="hidden" animate="show" variants={transition}>
+			<motion.h1
+				initial={{ opacity: 0 }}
+				animate={{ y: 20, opacity: 1.0 }}
+				transition={{ delay: 1.0, x: { type: 'spring', stiffness: 100 } }}>
 				Hello! My name is Brandon.
 			</motion.h1>
 		</Center>
