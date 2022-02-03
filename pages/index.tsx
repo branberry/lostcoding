@@ -91,10 +91,11 @@ const IntroductionSection: React.FC = () => {
 export default function Home() {
 	const { colorMode, toggleColorMode } = useColorMode();
 	useEffect(() => {
+		console.log('useEffect');
 		if (colorMode === 'light') {
 			toggleColorMode();
 		}
-	}, []);
+	}, [colorMode, toggleColorMode]);
 
 	return (
 		<Box>
