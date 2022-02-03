@@ -1,4 +1,4 @@
-import { Center, Box } from '@chakra-ui/react';
+import { Center, Box, useColorMode } from '@chakra-ui/react';
 import { Canvas, extend, MeshProps, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
 import { Text, SpotLight, Shadow, Stars, Cloud, Sky } from '@react-three/drei';
@@ -8,6 +8,7 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { motion as motion3d } from 'framer-motion-3d';
 import { motion, Transition } from 'framer-motion';
 import { Euler, Mesh, TextureLoader, Vector3 } from 'three';
+import { useEffect } from 'react';
 
 extend({ TextGeometry });
 
@@ -86,7 +87,15 @@ const IntroductionSection: React.FC = () => {
 		</Center>
 	);
 };
+
 export default function Home() {
+	const { colorMode, toggleColorMode } = useColorMode();
+	useEffect(() => {
+		if (colorMode === 'light') {
+			toggleColorMode();
+		}
+	}, []);
+
 	return (
 		<Box>
 			<Box>
