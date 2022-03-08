@@ -1,14 +1,15 @@
 import { Center, Box, useColorMode } from '@chakra-ui/react';
 import { Canvas, extend, MeshProps, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
-import { Text, SpotLight, Shadow, Stars, Cloud, Sky } from '@react-three/drei';
-import { Ref, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Text, SpotLight, Shadow, Stars, Cloud, Sky, Scroll } from '@react-three/drei';
+import { MutableRefObject, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { motion as motion3d } from 'framer-motion-3d';
-import { motion, Transition } from 'framer-motion';
-import { Euler, Mesh, TextureLoader, Vector3 } from 'three';
+import { motion, Variants } from 'framer-motion';
+import { Euler, TextureLoader, Vector3 } from 'three';
 import { useEffect } from 'react';
+import useResizeObserver from '@react-hook/resize-observer';
 
 extend({ TextGeometry });
 
@@ -70,43 +71,86 @@ const Banner: React.FC = () => {
 			</group>
 			<ambientLight intensity={1} />
 			<pointLight position={[-100, 0, 0]} />
-			<Stars radius={500} depth={50} count={5000} fade />
+			<Stars radius={500} count={50000} fade />
 		</>
 	);
 };
 
 const IntroductionSection: React.FC = () => {
 	return (
-		<Center>
-			<motion.h1
-				initial={{ opacity: 0 }}
-				animate={{ y: 20, opacity: 1.0 }}
-				transition={{ delay: 1.0, x: { type: 'spring', stiffness: 100 } }}>
-				Hello! My name is Brandon.
-			</motion.h1>
-		</Center>
+		<motion.h1
+			initial={{ opacity: 0 }}
+			animate={{ y: 20, opacity: 1.0 }}
+			transition={{ delay: 1.0, x: { type: 'spring', stiffness: 100 } }}>
+			Hello! My name is Brandon.
+		</motion.h1>
 	);
+};
+
+const ScrollContainer: React.FC = ({ children }) => {
+	const scrollContainerVariants: Variants = {
+		offscreen: {
+			y: 300,
+		},
+		onscreen: {
+			y: 50,
+			rotate: -10,
+			transition: {
+				type: 'spring',
+				bounce: 0.4,
+				duration: 0.8,
+			},
+		},
+	};
+	return (
+		<motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.8 }}>
+			<motion.div variants={scrollContainerVariants}>{children}</motion.div>
+		</motion.div>
+	);
+};
+
+const useSize = (target: MutableRefObject<any>) => {
+	const [size, setSize] = useState<DOMRectReadOnly>();
+
+	useLayoutEffect(() => {
+		setSize(target?.current?.getBoundingClientRect());
+	}, [target]);
+
+	// Where the magic happens
+	useResizeObserver(target, (entry) => setSize(entry.contentRect));
+	return size;
 };
 
 export default function Home() {
 	const { colorMode, toggleColorMode } = useColorMode();
+
+	const canvasRef = useRef(null);
+
+	const size = useSize(canvasRef);
+
 	useEffect(() => {
-		console.log('useEffect');
 		if (colorMode === 'light') {
 			toggleColorMode();
 		}
 	}, [colorMode, toggleColorMode]);
 
 	return (
-		<Box>
-			<Box>
-				<Canvas>
-					<Physics>
-						<Banner />
-					</Physics>
-				</Canvas>
-			</Box>
-			<IntroductionSection />
+		<Box ref={canvasRef}>
+			<Canvas style={{ height: size?.height, width: size?.width }}>
+				<Physics>
+					<Banner />
+				</Physics>
+			</Canvas>
+			<Center sx={{ position: 'absolute', top: '10vh', left: '40vw', fontSize: '6em' }}>
+				<ScrollContainer>
+					<IntroductionSection />
+					<IntroductionSection />
+
+					<IntroductionSection />
+					<IntroductionSection />
+					<IntroductionSection />
+				</ScrollContainer>
+			</Center>
 		</Box>
 	);
 }
