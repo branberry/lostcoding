@@ -75,7 +75,7 @@ const Banner: React.FC = () => {
 	);
 };
 
-const IntroductionSection: React.FC = () => {
+export const IntroductionSection: React.FC = () => {
 	return (
 		<motion.h1
 			initial={{ opacity: 0 }}
@@ -130,11 +130,7 @@ export default function Home() {
 					<Banner />
 				</Physics>
 			</Canvas>
-			<Center sx={{ position: 'absolute', top: '10vh', left: '40vw', fontSize: '6em' }}>
-				<ScrollContainer>
-					<IntroductionSection />
-				</ScrollContainer>
-			</Center>
+			<Center sx={{ position: 'absolute', top: '10vh', left: '40vw', fontSize: '6em' }}></Center>
 		</Box>
 	);
 }
