@@ -118,7 +118,13 @@ export default function Home() {
 	}, [colorMode, toggleColorMode]);
 
 	return (
-		<Box sx={{ width: '100vw', height: '100vh' }}>
+		<Box
+			css={{
+				width: '100vw',
+				height: '100vh',
+				minWidth: '500px',
+				minHeight: '800px',
+			}}>
 			<Canvas>
 				<Physics>
 					<Banner />
