@@ -109,24 +109,8 @@ const ScrollContainer: React.FC = ({ children }) => {
 	);
 };
 
-const useSize = (target: MutableRefObject<any>) => {
-	const [size, setSize] = useState<DOMRectReadOnly>();
-
-	useLayoutEffect(() => {
-		setSize(target?.current?.getBoundingClientRect());
-	}, [target]);
-
-	// Where the magic happens
-	useResizeObserver(target, (entry) => setSize(entry.contentRect));
-	return size;
-};
-
 export default function Home() {
 	const { colorMode, toggleColorMode } = useColorMode();
-
-	const canvasRef = useRef(null);
-
-	const size = useSize(canvasRef);
 
 	useEffect(() => {
 		if (colorMode === 'light') {
@@ -135,19 +119,14 @@ export default function Home() {
 	}, [colorMode, toggleColorMode]);
 
 	return (
-		<Box ref={canvasRef}>
-			<Canvas style={{ height: size?.height, width: size?.width }}>
+		<Box sx={{ width: '100vw', height: '100vh' }}>
+			<Canvas>
 				<Physics>
 					<Banner />
 				</Physics>
 			</Canvas>
 			<Center sx={{ position: 'absolute', top: '10vh', left: '40vw', fontSize: '6em' }}>
 				<ScrollContainer>
-					<IntroductionSection />
-					<IntroductionSection />
-
-					<IntroductionSection />
-					<IntroductionSection />
 					<IntroductionSection />
 				</ScrollContainer>
 			</Center>
