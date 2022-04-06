@@ -13,7 +13,8 @@ import { useEffect } from 'react';
 extend({ TextGeometry });
 
 const Banner: React.FC = () => {
-	const [lostColor, setLostColor] = useState('');
+	const [lostColorToggle, setLostColorToggle] = useState(false);
+	const [codingColorToggle, setCodingColorToggle] = useState(false);
 	const font = useLoader(FontLoader, '/static/fonts/bold.blob');
 	const material = useLoader(TextureLoader, '/static/materials/textmatcap.png');
 
@@ -65,16 +66,21 @@ const Banner: React.FC = () => {
 					castShadow
 					whileHover={{ scale: 1.2 }}
 					onClick={() => {
-						console.log('hover');
-						setLostColor('red');
+						setLostColorToggle(!lostColorToggle);
 					}}>
 					<textGeometry args={['LOST', config]} />
-					<meshMatcapMaterial matcap={material} color={lostColor} />
+					<meshMatcapMaterial matcap={material} color={lostColorToggle ? 'red' : 'skyblue'} />
 					<Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
 				</motion3d.mesh>
-				<motion3d.mesh ref={codingRef} position={[-20, -10, 0]} whileHover={{ scale: 1.2 }}>
+				<motion3d.mesh
+					ref={codingRef}
+					position={[-30, -10, 0]}
+					whileHover={{ scale: 1.2 }}
+					onClick={() => {
+						setCodingColorToggle(!codingColorToggle);
+					}}>
 					<textGeometry args={['CODING', config]} />
-					<meshMatcapMaterial matcap={material} />
+					<meshMatcapMaterial matcap={material} color={codingColorToggle ? 'red' : 'skyblue'} />
 				</motion3d.mesh>
 			</group>
 			<ambientLight intensity={1} />
