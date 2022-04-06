@@ -7,12 +7,13 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { motion as motion3d } from 'framer-motion-3d';
 import { motion, Variants } from 'framer-motion';
-import { Euler, TextureLoader, Vector3 } from 'three';
+import { Euler, Material, TextureLoader, Vector3 } from 'three';
 import { useEffect } from 'react';
 
 extend({ TextGeometry });
 
 const Banner: React.FC = () => {
+	const [lostColor, setLostColor] = useState('');
 	const font = useLoader(FontLoader, '/static/fonts/bold.blob');
 	const material = useLoader(TextureLoader, '/static/materials/textmatcap.png');
 
@@ -58,9 +59,17 @@ const Banner: React.FC = () => {
 	return (
 		<>
 			<group scale={[0.6, 0.6, 0.4]} ref={groupRef}>
-				<motion3d.mesh ref={lostRef} receiveShadow castShadow whileHover={{ scale: 1.2 }}>
+				<motion3d.mesh
+					ref={lostRef}
+					receiveShadow
+					castShadow
+					whileHover={{ scale: 1.2 }}
+					onClick={() => {
+						console.log('hover');
+						setLostColor('red');
+					}}>
 					<textGeometry args={['LOST', config]} />
-					<meshMatcapMaterial matcap={material} />
+					<meshMatcapMaterial matcap={material} color={lostColor} />
 					<Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
 				</motion3d.mesh>
 				<motion3d.mesh ref={codingRef} position={[-20, -10, 0]} whileHover={{ scale: 1.2 }}>
