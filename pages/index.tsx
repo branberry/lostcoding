@@ -71,7 +71,7 @@ const Banner: React.FC = () => {
 			</group>
 			<ambientLight intensity={1} />
 			<pointLight position={[-100, 0, 0]} />
-			<Stars radius={500} count={50000} fade />
+			<Stars radius={100} count={10000} fade />
 		</>
 	);
 };
