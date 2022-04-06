@@ -9,7 +9,6 @@ import { motion as motion3d } from 'framer-motion-3d';
 import { motion, Variants } from 'framer-motion';
 import { Euler, TextureLoader, Vector3 } from 'three';
 import { useEffect } from 'react';
-import useResizeObserver from '@react-hook/resize-observer';
 
 extend({ TextGeometry });
 
@@ -22,12 +21,12 @@ const Banner: React.FC = () => {
 			font,
 			size: 40,
 			height: 30,
-			curveSegments: 32,
+			curveSegments: 64,
 			bevelEnabled: true,
 			bevelThickness: 6,
 			bevelSize: 2.5,
 			bevelOffset: 0,
-			bevelSegments: 8,
+			bevelSegments: 16,
 		}),
 		[font]
 	);
@@ -37,7 +36,7 @@ const Banner: React.FC = () => {
 	const groupRef = useRef<MeshProps>(null);
 
 	useThree(({ camera }) => {
-		camera.position.set(0, 0, 100);
+		camera.position.set(0, 0, 200);
 
 		if (codingRef.current && lostRef.current) {
 			const codingPosition: Vector3 = codingRef.current.position! as Vector3;
