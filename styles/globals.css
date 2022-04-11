@@ -9,6 +9,10 @@ body {
   width: 100vw;
 }
 
+body::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
