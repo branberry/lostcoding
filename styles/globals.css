@@ -11,6 +11,7 @@ body {
 
 body::-webkit-scrollbar {
   -webkit-appearance: none;
+  display: none;
 }
 
 a {
@@ -28,5 +29,6 @@ a {
   }
   ::-webkit-scrollbar {
     -webkit-appearance: none;
+    display: none;
 }
 }
