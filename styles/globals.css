@@ -26,4 +26,7 @@ a {
   #__next {
     display: flex
   }
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
 }
