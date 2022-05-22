@@ -9,8 +9,7 @@ import { motion as motion3d } from 'framer-motion-3d';
 import { motion, Variants } from 'framer-motion';
 import { Euler, Material, TextureLoader, Vector3 } from 'three';
 import { useEffect } from 'react';
-
-extend({ TextGeometry });
+import { CameraController } from '../components/three/camera-controls';
 
 const Banner: React.FC = () => {
 	const [lostColorToggle, setLostColorToggle] = useState(false);
@@ -57,8 +56,15 @@ const Banner: React.FC = () => {
 		}
 	});
 
+	/**
+	 * Here we will handle when lost is clicked and
+	 * transition the camera to another location
+	 */
+	const handleLostClick = () => {};
+
 	return (
 		<>
+			<CameraController />
 			<group scale={[0.6, 0.6, 0.4]} ref={groupRef}>
 				<motion3d.mesh
 					ref={lostRef}
@@ -69,7 +75,7 @@ const Banner: React.FC = () => {
 						setLostColorToggle(!lostColorToggle);
 					}}>
 					<textGeometry args={['LOST', config]} />
-					<meshMatcapMaterial matcap={material} color={lostColorToggle ? 'red' : 'skyblue'} />
+					<meshMatcapMaterial matcap={material} />
 					<Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
 				</motion3d.mesh>
 				<motion3d.mesh
@@ -80,7 +86,7 @@ const Banner: React.FC = () => {
 						setCodingColorToggle(!codingColorToggle);
 					}}>
 					<textGeometry args={['CODING', config]} />
-					<meshMatcapMaterial matcap={material} color={codingColorToggle ? 'red' : 'skyblue'} />
+					<meshMatcapMaterial matcap={material} />
 				</motion3d.mesh>
 			</group>
 			<ambientLight intensity={1} />
