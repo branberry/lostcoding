@@ -79,13 +79,7 @@ const VirtualLandscape: React.FC = () => {
 					<meshMatcapMaterial matcap={material} />
 					<Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
 				</motion3d.mesh>
-				<motion3d.mesh
-					ref={codingRef}
-					position={[-30, -10, 0]}
-					whileHover={{ scale: 1.1 }}
-					onClick={() => {
-						setCodingColorToggle(!codingColorToggle);
-					}}>
+				<motion3d.mesh ref={codingRef} position={[-30, -10, 0]} whileHover={{ scale: 1.1 }} onClick={handleCodingClick}>
 					<textGeometry args={['CODING', config]} />
 					<meshMatcapMaterial matcap={material} />
 				</motion3d.mesh>
