@@ -1,19 +1,21 @@
 import { Center, Box, useColorMode } from '@chakra-ui/react';
 import { Canvas, extend, MeshProps, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
-import { Text, SpotLight, Shadow, Stars, Cloud, Sky, Scroll } from '@react-three/drei';
-import { MutableRefObject, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
+import { Shadow, Stars } from '@react-three/drei';
+import { useMemo, useRef, useState } from 'react';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { motion as motion3d } from 'framer-motion-3d';
 import { motion, Variants } from 'framer-motion';
 import { Euler, Material, TextureLoader, Vector3 } from 'three';
 import { useEffect } from 'react';
-import { CameraController } from '../components/three/camera-controls';
+import { CameraControl, CameraController } from '../components/three/camera-controls';
 
-const Banner: React.FC = () => {
+const VirtualLandscape: React.FC = () => {
 	const [lostColorToggle, setLostColorToggle] = useState(false);
 	const [codingColorToggle, setCodingColorToggle] = useState(false);
+
+	const cameraControls = useRef<CameraControl | null>(null);
+
 	const font = useLoader(FontLoader, '/static/fonts/bold.blob');
 	const material = useLoader(TextureLoader, '/static/materials/textmatcap.png');
 
@@ -60,20 +62,15 @@ const Banner: React.FC = () => {
 	 * Here we will handle when lost is clicked and
 	 * transition the camera to another location
 	 */
-	const handleLostClick = () => {};
+	const handleLostClick = () => {
+		cameraControls.current?.rotate(Math.PI / 4, 0, true);
+	};
 
 	return (
 		<>
 			<CameraController />
 			<group scale={[0.6, 0.6, 0.4]} ref={groupRef}>
-				<motion3d.mesh
-					ref={lostRef}
-					receiveShadow
-					castShadow
-					whileHover={{ scale: 1.2 }}
-					onClick={() => {
-						setLostColorToggle(!lostColorToggle);
-					}}>
+				<motion3d.mesh ref={lostRef} receiveShadow castShadow whileHover={{ scale: 1.2 }} onClick={handleLostClick}>
 					<textGeometry args={['LOST', config]} />
 					<meshMatcapMaterial matcap={material} />
 					<Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
@@ -145,17 +142,17 @@ export default function Home() {
 				height: '100vh',
 				minWidth: '500px',
 				minHeight: '800px',
-				'-webkit-touch-callout': 'none' /* iOS Safari */,
-				'-webkit-user-select': 'none' /* Safari */,
-				'-khtml-user-select': 'none' /* Konqueror HTML */,
-				'-moz-user-select': 'none' /* Old versions of Firefox */,
-				'-ms-user-select': 'none' /* Internet Explorer/Edge */,
-				'user-select': 'none' /* Non-prefixed version, currently
+				WebkitTouchCallout: 'none' /* iOS Safari */,
+				WebkitUserSelect: 'none' /* Safari */,
+				KhtmlUserSelect: 'none' /* Konqueror HTML */,
+				MozUserSelect: 'none' /* Old versions of Firefox */,
+				msUserSelect: 'none' /* Internet Explorer/Edge */,
+				userSelect: 'none' /* Non-prefixed version, currently
 				                          supported by Chrome, Edge, Opera and Firefox */,
 			}}>
 			<Canvas>
 				<Physics>
-					<Banner />
+					<VirtualLandscape />
 				</Physics>
 			</Canvas>
 			<Center sx={{ position: 'absolute', top: '10vh', left: '40vw', fontSize: '6em' }}></Center>

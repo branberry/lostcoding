@@ -1,29 +1,49 @@
 import { extend, ReactThreeFiber, useThree, useFrame } from '@react-three/fiber';
-import CameraControl from 'camera-controls';
-import { useMemo } from 'react';
+import CameraControlDefault from 'camera-controls';
+import { ForwardedRef, forwardRef, MutableRefObject, useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 
-CameraControl.install({ THREE });
+CameraControlDefault.install({ THREE });
 extend({ TextGeometry });
-extend({ CameraControl });
+extend({ CameraControlDefault });
 
 declare global {
 	namespace JSX {
 		interface IntrinsicElements {
-			cameraControlsDefault: ReactThreeFiber.Node<CameraControl, typeof CameraControl>;
+			cameraControlDefault: ReactThreeFiber.Node<CameraControlDefault, typeof CameraControlDefault>;
 		}
 	}
 }
-export function CameraController() {
+const CameraController = forwardRef<CameraControlDefault, unknown>((_, ref) => {
+	const cameraControls = useRef<CameraControlDefault | null>(null);
 	const camera = useThree((state) => state.camera);
-	const gl = useThree((state) => state.gl);
+	const renderer = useThree((state) => state.gl);
 
-	const controls = useMemo(() => {
-		return new CameraControl(camera, gl.domElement);
-	}, []);
+	useFrame((_, delta) => cameraControls.current?.update(delta));
+	useEffect(() => () => cameraControls.current?.dispose(), []);
 
-	useFrame((state, delta) => controls.update(delta));
+	return (
+		<cameraControlDefault
+			ref={mergeRefs<CameraControlDefault>(cameraControls, ref)}
+			args={[camera, renderer.domElement]}
+		/>
+	);
+});
 
-	return null;
+CameraController.displayName = 'Camera Controller';
+
+function mergeRefs<T>(...refs: (MutableRefObject<T> | ForwardedRef<T>)[]) {
+	return (instance: T): void => {
+		for (const ref of refs) {
+			if (typeof ref === 'function') {
+				ref(instance);
+			} else if (ref) {
+				ref.current = instance;
+			}
+		}
+	};
 }
+
+export type CameraControl = CameraControlDefault;
+export { CameraController };
