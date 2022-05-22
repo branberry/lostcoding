@@ -63,14 +63,18 @@ const VirtualLandscape: React.FC = () => {
 	 * transition the camera to another location
 	 */
 	const handleLostClick = () => {
+		cameraControls.current?.rotate(-Math.PI / 4, 0, true);
+	};
+
+	const handleCodingClick = () => {
 		cameraControls.current?.rotate(Math.PI / 4, 0, true);
 	};
 
 	return (
 		<>
-			<CameraController />
+			<CameraController ref={cameraControls} />
 			<group scale={[0.6, 0.6, 0.4]} ref={groupRef}>
-				<motion3d.mesh ref={lostRef} receiveShadow castShadow whileHover={{ scale: 1.2 }} onClick={handleLostClick}>
+				<motion3d.mesh ref={lostRef} receiveShadow castShadow whileHover={{ scale: 1.1 }} onClick={handleLostClick}>
 					<textGeometry args={['LOST', config]} />
 					<meshMatcapMaterial matcap={material} />
 					<Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
@@ -78,7 +82,7 @@ const VirtualLandscape: React.FC = () => {
 				<motion3d.mesh
 					ref={codingRef}
 					position={[-30, -10, 0]}
-					whileHover={{ scale: 1.2 }}
+					whileHover={{ scale: 1.1 }}
 					onClick={() => {
 						setCodingColorToggle(!codingColorToggle);
 					}}>
