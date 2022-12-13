@@ -1,11 +1,11 @@
-const withTM = require("next-transpile-modules")([
-  "@webxr-input-profiles/motion-controllers",
-  "@react-three/xr",
-  "three",
-]);
-
-module.exports = withTM({
-  experimental: { esmExternals: "loose" },
-
-  reactStrictMode: true,
+const withPWA = require('next-pwa')({
+	dest: 'public',
 });
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+	reactStrictMode: true,
+	swcMinify: true,
+};
+
+module.exports = withPWA(nextConfig);
