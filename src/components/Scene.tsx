@@ -26,6 +26,9 @@ function Player() {
     position: [0, 5, 0],
   }));
 
+  window.addEventListener("keydown", (ev) => {
+    console.log(ev.key);
+  });
   return (
     <mesh ref={ref}>
       <sphereGeometry />
