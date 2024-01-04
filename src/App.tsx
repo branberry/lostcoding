@@ -1,6 +1,7 @@
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import { Scene } from "./components/Scene";
+import { Physics } from "@react-three/cannon";
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
       }}
     >
       <Canvas style={{ width: "100%", height: "100%" }}>
-        <Scene />
+        <Physics>
+          <Scene />
+        </Physics>
       </Canvas>
     </div>
   );
