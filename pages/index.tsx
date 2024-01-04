@@ -3,6 +3,7 @@ import { Center, Box, useColorMode } from '@chakra-ui/react';
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/cannon';
 import { useEffect } from 'react';
+import { MeshScene } from '../components/three/scenes/mesh-lines';
 
 export default function Home() {
 	const { colorMode, toggleColorMode } = useColorMode();
@@ -28,9 +29,9 @@ export default function Home() {
 				userSelect: 'none' /* Non-prefixed version, currently
 		                         supported by Chrome, Edge, Opera and Firefox */,
 			}}>
-			<Canvas>
+			<Canvas camera={{ position: [0, 0, 5], fov: 90 }}>
 				<Physics>
-					<></>
+					<MeshScene/>
 				</Physics>
 			</Canvas>
 			<Center sx={{ position: 'absolute', top: '10vh', left: '40vw', fontSize: '6em' }}></Center>
