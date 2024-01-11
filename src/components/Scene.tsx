@@ -1,5 +1,5 @@
 import { usePlane, useSphere } from "@react-three/cannon";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 import { BufferGeometry, Material, Mesh, Object3DEventMap } from "three";
 
@@ -26,11 +26,22 @@ function Player() {
     mass: 0.1,
     position: [0, 5, 0],
   }));
+  useFrame(({ camera }) => {
+    if (!ref.current) return;
+
+    camera.lookAt(ref.current.position);
+  });
+
+  useEffect(() => {
+    const unsubscribe = api.position.subscribe((pos) =>
+      ref.current?.position.set(...pos)
+    );
+    return unsubscribe;
+  });
 
   useEffect(() => {
     const eventHandler = (ev: KeyboardEvent) => {
       console.log(ev.key);
-      if (!ref.current) return;
 
       switch (ev.key) {
         case "w":
@@ -68,6 +79,7 @@ export function Scene() {
     camera.position.setY(5);
     camera.position.setZ(15);
   });
+
   return (
     <>
       <Floor />
