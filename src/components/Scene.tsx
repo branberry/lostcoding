@@ -1,5 +1,6 @@
 import { usePlane, useSphere } from "@react-three/cannon";
 import { useThree } from "@react-three/fiber";
+import { useEffect } from "react";
 import { BufferGeometry, Material, Mesh, Object3DEventMap } from "three";
 
 type PhysicsMesh = Mesh<
@@ -14,21 +15,45 @@ function Floor() {
   }));
   return (
     <mesh ref={ref}>
-      <planeGeometry args={[20, 20]} />
+      <planeGeometry args={[200, 200]} />
       <meshStandardMaterial />
     </mesh>
   );
 }
 
 function Player() {
-  const [ref] = useSphere<PhysicsMesh>(() => ({
+  const [ref, api] = useSphere<PhysicsMesh>(() => ({
     mass: 0.1,
     position: [0, 5, 0],
   }));
 
-  window.addEventListener("keydown", (ev) => {
-    console.log(ev.key);
-  });
+  useEffect(() => {
+    const eventHandler = (ev: KeyboardEvent) => {
+      console.log(ev.key);
+      if (!ref.current) return;
+
+      switch (ev.key) {
+        case "w":
+          api.applyForce([0, 0, -5], [0, 0, 0]);
+          break;
+        case "a":
+          api.applyForce([-5, 0, 0], [0, 0, 0]);
+          break;
+        case "s":
+          api.applyForce([0, 0, 5], [0, 0, 0]);
+          break;
+        case "d":
+          api.applyForce([5, 0, 0], [0, 0, 0]);
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", eventHandler);
+
+    return () => {
+      window.removeEventListener("keydown", eventHandler);
+    };
+  }, []);
   return (
     <mesh ref={ref}>
       <sphereGeometry />
