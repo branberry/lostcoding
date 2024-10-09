@@ -26,9 +26,13 @@ function Player() {
     mass: 0.1,
     position: [0, 5, 0],
   }));
+
   useFrame(({ camera }) => {
     if (!ref.current) return;
 
+    camera.position.x = ref.current.position.x - 2;
+    camera.position.y = ref.current.position.y + 4;
+    camera.position.z = ref.current.position.z - 5;
     camera.lookAt(ref.current.position);
   });
 
